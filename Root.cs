@@ -25,7 +25,7 @@ public class Root {
         RootView = child;
     }
     
-    public void ComputeRect(Rect rect) {
+    public void ComputeRects(Rect rect) {
         RootView.ComputeRect(rect, rect);
     }
 
