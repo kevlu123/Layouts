@@ -9,7 +9,8 @@ public abstract class Container : View, IEnumerable<View> {
         if (!Interactable || !VisibleRect.Contains(x, y)) {
             return new();
         }
-        foreach (var child in Children) {
+        for (int i = Children.Count - 1; i >= 0 ; i--) {
+            var child = Children[i];
             var hits = child.HitTest(x, y);
             if (hits.Count > 0) {
                 hits.Add(this);
