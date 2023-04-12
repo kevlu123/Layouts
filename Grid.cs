@@ -51,7 +51,7 @@ public class Grid : ScrollContainer {
                 child.Size.Width(columnWidth, rowHeight),
                 child.Size.Height(columnWidth, rowHeight)
             );
-            var childVisibleRect = childRect.Intersect(visibleRect);
+            var childVisibleRect = Overflow == Overflow.Visible ? childRect : childRect.Intersect(visibleRect);
             child.ComputeRect(childRect, childVisibleRect);
 
             if (col == columnCount - 1) {

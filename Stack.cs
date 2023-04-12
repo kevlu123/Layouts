@@ -53,7 +53,7 @@ public class VerticalStack : ScrollContainer {
             };
 
             var childRect = new Rect(x, y, width, height);
-            var childVisibleRect = childRect.Intersect(visibleRect);
+            var childVisibleRect = Overflow == Overflow.Visible ? childRect : childRect.Intersect(visibleRect);
             child.ComputeRect(childRect, childVisibleRect);
             y += height;
         }
@@ -115,7 +115,7 @@ public class HorizontalStack : ScrollContainer {
                 _ => throw new InvalidOperationException("Invalid vertical alignment"),
             };
             var childRect = new Rect(x, y, width, height);
-            var childVisibleRect = childRect.Intersect(visibleRect);
+            var childVisibleRect = Overflow == Overflow.Visible ? childRect : childRect.Intersect(visibleRect);
             child.ComputeRect(childRect, childVisibleRect);
             x += width;
         }
