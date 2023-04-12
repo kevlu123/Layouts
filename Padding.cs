@@ -5,6 +5,7 @@ public class Padding : Container {
     public int Bottom { get; set; }
     public int Left { get; set; }
     public int Right { get; set; }
+    public View Child => Children[0];
 
     public Padding(View child) : this(0, child) { }
     public Padding(int lrtb, View child) : this(lrtb, lrtb, child) { }
