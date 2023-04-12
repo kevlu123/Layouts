@@ -3,8 +3,8 @@ namespace Layouts;
 public abstract class View {
     public Sizing Size { get; set; } = new() { ProportionalWidth = 1, ProportionalHeight = 1 };
 
-    public Rect ComputedRect { get; set; }
-    public Rect VisibleRect { get; set; }
+    public Rect ComputedRect { get; private set; }
+    public Rect VisibleRect { get; private set; }
 
     public Alignment HorizontalAlignment { get; set; } = Alignment.Centre;
     public Alignment VerticalAlignment { get; set; } = Alignment.Centre;
