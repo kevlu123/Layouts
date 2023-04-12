@@ -6,7 +6,7 @@ public abstract class Container : View, IEnumerable<View> {
     protected List<View> Children { get; } = new();
 
     public override List<View> HitTest(int x, int y) {
-        if (!Interactable || !VisibleRect.Contains(x, y)) {
+        if (!Interactable) {
             return new();
         }
         for (int i = Children.Count - 1; i >= 0 ; i--) {
@@ -17,7 +17,10 @@ public abstract class Container : View, IEnumerable<View> {
                 return hits;
             }
         }
-        return new() { this };
+        if (VisibleRect.Contains(x, y)) {
+            return new() { this };
+        }
+        return new();
     }
 
     public override void Draw() {
