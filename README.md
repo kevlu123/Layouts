@@ -50,6 +50,36 @@ Since there are three boxes, each box takes up 1/3 of the parent's height.
 ## Documentation
 
 ```csharp
+// The root of the UI tree which is responsible for managing updates and events.
+// Note that this is not a view itself.
+public class Root {
+    // The root view of the UI tree
+    public View RootView { get; set; }
+    // The currently focused view
+    public View? Focus { get; set; }
+
+    // Constructs a new root with the given root view
+    public Root(View rootView);
+
+    // Computes the rects of the views in the tree.
+    // This should be called whenever any rect changes (usually
+    // every frame if scrolling is desired).
+    public void ComputeRects(Rect rect);
+
+    // Calls Draw on every visible view in order
+    public void Draw();
+
+    // Call this once per frame.
+    public void Update();
+
+    // Registers a mouse move event
+    public void RegisterMouseMove(int x, int y);
+    // Registers a mouse button event if there is a button state change
+    public void RegisterMouseButton(MouseButton button, bool down);
+    // Registers a mouse scroll event
+    public void RegisterMouseScroll(float deltaX, float deltaY);
+}
+
 // The base class for all UI elements
 public abstract class View {
     // The size of the view
@@ -73,7 +103,7 @@ public abstract class View {
     public virtual void OnMouseLeave();
     public virtual void OnMouseDown(MouseEventArgs e);
     public virtual void OnMouseUp(MouseEventArgs e);
-    public virtual void OnMouseDrag(MouseEventArgs e);
+    public virtual void OnMouseDrag(MouseDragEventArgs e);
     public virtual void OnMouseScroll(MouseScrollEventArgs e);
     public virtual void OnFocusGained();
     public virtual void OnFocusLost();
