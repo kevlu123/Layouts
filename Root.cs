@@ -4,7 +4,7 @@ public class Root {
     private Vector2 mousePosition;
     private View? mouseOver;
     private List<View> mouseOverHierarchy = new();
-    private readonly View?[] mouseDrag = new View?[5];
+    private readonly (View? view, Vector2 from)[] mouseDrag = new(View?, Vector2)[5];
     private readonly bool[] mouseState = new bool[5];
     private View? focus;
 
@@ -51,7 +51,11 @@ public class Root {
     public void RegisterMouseMove(int x, int y) {
         mousePosition = new Vector2(x, y);
         for (int i = 0; i < mouseDrag.Length; i++) {
-            mouseDrag[i]?.OnMouseDrag(new MouseEventArgs { Position = mousePosition, Button = (MouseButton)i });
+            mouseDrag[i].view?.OnMouseDrag(new MouseDragEventArgs {
+                DragFrom = mouseDrag[i].from,
+                Position = mousePosition,
+                Button = (MouseButton)i
+            });
         }
     }
 
@@ -61,14 +65,15 @@ public class Root {
         if (down) {
             if (!mouseState[b]) {
                 mouseOver?.OnMouseDown(e);
-                mouseDrag[b] = mouseOver;
+                mouseDrag[b].view = mouseOver;
+                mouseDrag[b].from = mousePosition;
                 mouseState[b] = true;
                 Focus = mouseOver;
             }
         } else {
             if (mouseState[b]) {
-                mouseDrag[b]?.OnMouseUp(e);
-                mouseDrag[b] = null;
+                mouseDrag[b].view?.OnMouseUp(e);
+                mouseDrag[b].view = null;
                 mouseState[b] = false;
             }
         }

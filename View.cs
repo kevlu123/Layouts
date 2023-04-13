@@ -31,7 +31,7 @@ public abstract class View {
     public virtual void OnMouseLeave() { }
     public virtual void OnMouseDown(MouseEventArgs e) { }
     public virtual void OnMouseUp(MouseEventArgs e) { }
-    public virtual void OnMouseDrag(MouseEventArgs e) { }
+    public virtual void OnMouseDrag(MouseDragEventArgs e) { }
     public virtual void OnMouseScroll(MouseScrollEventArgs e) { }
     public virtual void OnFocusGained() { }
     public virtual void OnFocusLost() { }

@@ -5,6 +5,12 @@ public class MouseEventArgs : EventArgs {
     public MouseButton Button { get; set; }
 }
 
+public class MouseDragEventArgs : EventArgs {
+    public Vector2 DragFrom { get; set; }
+    public Vector2 Position { get; set; }
+    public MouseButton Button { get; set; }
+}
+
 public class MouseScrollEventArgs : EventArgs {
     public Vector2 Position { get; set; }
     public Vector2f Delta { get; set; }
